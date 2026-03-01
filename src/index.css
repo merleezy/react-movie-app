@@ -139,6 +139,10 @@
     & .content .year {
       @apply text-gray-100 font-medium text-base;
     }
+
+    & .content .add-to-watchlist {
+      @apply ml-auto text-gray-100 font-medium text-base;
+    }
   }
 }
 

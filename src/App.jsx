@@ -25,6 +25,8 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState('');
   
   const [trendingMovies, setTrendingMovies] = useState([]);
+
+  // const [watchList, setWatchList] = useState('');
   
   // Debounce the search term to prevent making too many API requests
   useEffect(() => {
@@ -113,6 +115,19 @@ const App = () => {
             </ul>
           </section>
         )}
+
+        {/* <section className="watch-list">
+          <h2>Watchlist</h2>
+          <ul>
+            {movieList.map((movie) => (
+              <MovieCard 
+                key={movie.id}
+                movie={movie}
+                isWatchlisted={watchList.has(movie.id)}
+              />
+            ))}
+          </ul>
+        </section> */}
         
         <section className="all-movies">
           <h2>All Movies</h2>
