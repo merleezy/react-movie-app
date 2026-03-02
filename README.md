@@ -29,12 +29,14 @@ cd react-movie-app
 ```
 
 **Installation:**   
+   
 Install the project dependencies using npm:   
 ```bash
 npm install
 ```
 
 **Set Up Environment Variables:**   
+   
 Create a `.env.local` file in the root of the project and add the following content:   
 ```env
 VITE_TMDB_API_KEY=
