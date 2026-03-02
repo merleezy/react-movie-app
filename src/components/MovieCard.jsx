@@ -1,7 +1,7 @@
 import React from 'react'
 
 const MovieCard = ({ movie: 
-  { title, vote_average, poster_path, release_date, original_language }, isWatchlisted=false
+  { id, title, vote_average, poster_path, release_date, original_language }, isWatchlisted=false, onToggleWatchlist
 }) => {
   return (
     <div className="movie-card">
@@ -27,14 +27,16 @@ const MovieCard = ({ movie:
 
           <button
             type="button"
-            className="add-to-watchlist ml-auto inline-flex items-center justify-center"
+            className="add-to-watchlist"
+            onClick={() => onToggleWatchlist?.(id)}
+            aria-pressed={isWatchlisted}
             aria-label={isWatchlisted ? "Remove from watchlist" : "Add to watchlist"}
           >
-            <img
-              src={isWatchlisted ? "/icons/heart-filled.svg" : "/icons/heart.svg"}
-              alt=""
-              className="h-6 w-6"
-            />
+              <img
+                src={isWatchlisted ? "/heart-solid.svg" : "/heart-outline.svg"}
+                alt={isWatchlisted ? "Watchlisted" : "Not watchlisted"}
+                className="h-6 w-6 transition-all duration-200 ease-out hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
+              />
           </button>
         </div>
       </div>

@@ -26,7 +26,10 @@ const App = () => {
   
   const [trendingMovies, setTrendingMovies] = useState([]);
 
-  // const [watchList, setWatchList] = useState('');
+  const [watchList, setWatchList] = useState(() => {
+    const saved = localStorage.getItem('watchlist');
+    return saved ? new Set(JSON.parse(saved)) : new Set();
+  });
   
   // Debounce the search term to prevent making too many API requests
   useEffect(() => {
@@ -83,6 +86,19 @@ const App = () => {
     }
   }
 
+  const toggleWatchlist = (movieId) => {
+    if (!movieId) return;
+
+    setWatchList((prev) => {
+      const next = new Set(prev);
+      if (next.has(movieId)) next.delete(movieId);
+      else next.add(movieId);
+
+      localStorage.setItem('watchlist', JSON.stringify([...next]));
+      return next;
+    })
+  }
+
   useEffect(() => {
     fetchMovies(debouncedSearchTerm);
   }, [debouncedSearchTerm])
@@ -116,18 +132,23 @@ const App = () => {
           </section>
         )}
 
-        {/* <section className="watch-list">
+        <section className="watchlist">
           <h2>Watchlist</h2>
           <ul>
-            {movieList.map((movie) => (
-              <MovieCard 
-                key={movie.id}
-                movie={movie}
-                isWatchlisted={watchList.has(movie.id)}
-              />
-            ))}
+            {movieList
+              .filter((movie) => watchList.has(movie.id))
+              .map((movie) => (
+                <li key={movie.id}>
+                  <MovieCard
+                    movie={movie}
+                    isWatchlisted={watchList.has(movie.id)}
+                    onToggleWatchlist={toggleWatchlist}
+                  />
+                </li>
+             
+              ))}
           </ul>
-        </section> */}
+        </section>
         
         <section className="all-movies">
           <h2>All Movies</h2>
@@ -139,7 +160,12 @@ const App = () => {
           ) : (
             <ul>
               {movieList.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} />
+                <MovieCard 
+                key={movie.id} 
+                movie={movie} 
+                isWatchlisted={watchList.has(movie.id)}
+                onToggleWatchlist={toggleWatchlist}
+                />
               ))}
             </ul>
           )}

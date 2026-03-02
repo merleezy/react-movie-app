@@ -11,7 +11,7 @@ Tutorial-based movie app built while following JavaScript Mastery to learn moder
 - Backend persistence & trending searches (Appwrite)
 
 ## My additions
-- Favorite movies list/watchlist (wip)
+- Added a watchlist feature that allows users to save movies they want to watch later. It uses local storage to persist the watchlist across sessions.
 
 ## Tech
 React, Tailwind CSS, Appwrite, TMDB API
